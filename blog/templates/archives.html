@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <h1 class="content-subhead">All posts in archive</h1>
+    {% if error %}
+        <p>No related posts</p>
+    {% else %}
+        {% for post in post_list %}
+        <section>
+            <header>
+                <h2>
+                    <a href="{{ post.get_absolute_url }}">
+                        {{ post.title }}
+                    </a>
+                </h2>
+                <p class="">
+                    Time:
+                        <a href="#">
+                            {{ post.date_time |date:'Y /m /d'}}
+                        </a> &nbsp;&nbsp;
+                    Category:
+                        <a href="{% url 'search_tag' tag=post.category %}">
+                            {{ post.category }}
+                        </a> &nbsp; &nbsp;
+                    Tag:
+                        {% for tag in post.tag.all %}
+                            <a class="" href="#">{{ tag }}</a>
+                        {% endfor %}
+                </p>
+            </header>
+        </section>
+        <hr>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

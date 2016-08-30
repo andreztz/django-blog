@@ -1,0 +1,16 @@
+<!-- Para dizer a caixa de comentários start -->
+    <div class="ds-thread" data-thread-key="{{ post.id }}" data-title="{{ post.title }}" data-url="{{ post.get_absolute_url }}"></div>
+<!-- Para dizer a caixa de comentários end -->
+<!-- Diga código JS público start ( Basta inserir uma página de uma vez ) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"#"}; //andrewliu
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript'; ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- Diga código JS público end -->

@@ -1,0 +1,21 @@
+{
+  "name": "DjangoBlog",
+  "homepage": "https://github.com/andreztz/DjangoBlog",
+  "authors": [
+    "andreztz <andreztz@gmail.com>"
+  ],
+  "description": "DjangoBlog",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}

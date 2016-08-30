@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}
+    {% for post in post_list %}
+        <title>{{ post.category }}</title>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+  <div>
+    <h1 class="content-subhead">All posts</h1>
+    {% for post in post_list %}
+        <h2>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </h2>
+        <br>
+        <p class="small post-meta">
+            published：
+                <a class="">
+                    {{ post.created_at | date:'Y/m/d' }}
+                </a>
+                &nbsp;&nbsp;
+            edited：
+                <a class="">
+                    {{ post.updated_at | date:'Y/m/d' }}
+                </a>
+                &nbsp;&nbsp;
+            category：
+                <a class="" href="{% url 'search_category' post.category %}">
+                    {{ post.category | title}}
+                </a>
+                &nbsp;&nbsp;
+            tags：
+            {% for tag in post.tag.all %}
+                <a href="{% url 'search_tag' tag %}">{{ tag }}</a>
+            {% endfor %}
+        </p>
+        <br>
+    {% empty %}
+        <li>Sorry, no article with this tag!!.</li>
+    {% endfor %}
+  </div>
+  <a href="#" class="go-top">Go Top</a>
+{% endblock %}

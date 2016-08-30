@@ -1,0 +1,228 @@
+@import url(https://fonts.googleapis.com/css?family=Covered+By+Your+Grace);
+@import url(tags.css);
+
+h1 {
+    font-size: 25pt;
+}
+
+h2 {
+    font-size: 18pt;
+}
+
+.column-left {
+    background-image: url('../images/image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+}
+
+.column-left hgroup h1 {
+    font-family: 'Covered By Your Grace', cursive;
+}
+.column-left-social {
+    bottom: 0 !important;
+}
+.column-left-menu {
+    margin-top: 10vh;
+}
+.column-right {
+    padding-top: 20px;
+    padding: 5% 5% 0 5%;
+}
+
+.social-icons {
+    font-size: 8pt;
+    text-align: center;
+    padding-top: 10vh;
+    padding-bottom: 10px;
+}
+.image-profile {
+    max-width: 125px !important;
+    margin: auto;
+}
+
+.content-subhead {
+    text-transform: uppercase;
+    color: #aaa;
+    border-bottom: 1px solid #eee;
+    padding: 0.4em 0;
+    font-size: 80%;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+.post-meta {
+    color: #999;
+    font-size: 90%;
+    margin-top: -10px;
+}
+
+.post-category {
+    margin: 0 0.1em;
+    padding: 0.4em 0.6em;
+    color: #fff;
+    background: #999;
+    font-size: 90%;
+    text-decoration: None !important;
+    border-radius: 5px;
+    padding: 1.5pt;
+}
+
+.go-top {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+    padding: 1em;
+    display: none;
+    }
+
+.go-top:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+i {
+    padding-right: 5pt;
+    padding-left: 5pt;
+}
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: #4c7abb;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+ul.pagination li a.active {
+    background-color: #eee;
+    color: black;
+    border: 1px solid #ddd;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+/*
+    Menu SideBar
+
+*/
+
+.btn-burguer {
+    display: inline-block;
+    position: relative;
+    padding: 5px;
+    width: 40px;
+    background: rgba(41, 44, 47, 0.97);
+    cursor: pointer;
+}
+
+.btn-burguer.active {
+    background: rgba(28, 26, 33, 0.77);
+}
+
+.btn-burguer > div {
+    transition: transform .5s;
+}
+
+.btn-burguer .icon-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: rgba(51, 122, 183, 0.94);
+    margin: 5px auto;
+    transition: transform .2s, width .2s;
+}
+
+.btn-burguer.active > div {
+    transform: rotate(360deg);
+}
+
+.btn-burguer.active .icon-bar:nth-of-type(1) {
+    width: 20px;
+    transform: rotate(40deg) translateX(3px) translateY(-2px);
+}
+
+.btn-burguer.active .icon-bar:nth-of-type(2) {
+    width: 30px;
+    transform: translateX(-2px);
+}
+
+.btn-burguer.active .icon-bar:nth-of-type(3) {
+    width: 20px;
+    transform: rotate(-40deg) translateX(3px) translateY(2px);
+}
+
+.dropdown {
+    background: rgba(41, 44, 47, 0.97);
+    position: absolute;
+    list-style: none;
+    display: none;
+    min-width: 110px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    border: 0;
+    margin: 0;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.dropdown li {
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-active {
+    display: initial;
+}
+
+.dropdown a {
+    color: rgba(228, 224, 255, 0.82);
+    padding: 15px 25px;
+    text-decoration: none;
+    display: block;
+    font-size: 11pt;
+}
+
+.dropdown a:hover {
+    background-color: rgba(84, 78, 78, 0.35);
+}
+
+
+
+@media (min-width: 960px), handheld and (orientation: landscape) {
+    .column-left {
+        position: fixed;
+        height: 100vh;
+
+    }
+    .column-right {
+        padding-top: 20px;
+        padding: 5% 5% 0 5%%;
+        margin-left: 25%;
+    }
+    .column-left-social {
+        position: absolute !important;
+        width: 100%;
+
+    }
+    .column-left-menu {
+        margin-top: 40vh
+    }
+    .social-icons {
+        text-align: center;
+        padding: 10px;
+    }
+
+}
