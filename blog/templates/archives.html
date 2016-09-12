@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-    <h1 class="content-subhead">All posts in archive</h1>
+    <div class="content-subhead">All posts in archive</div>
     {% if error %}
         <p>No related posts</p>
     {% else %}
@@ -33,5 +32,4 @@
         <hr>
         {% endfor %}
     {% endif %}
-</div>
 {% endblock %}

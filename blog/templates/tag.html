@@ -7,8 +7,7 @@
 {% endblock %}
 
 {% block content %}
-  <div>
-    <h1 class="content-subhead">All posts</h1>
+    <div class="content-subhead">All posts</div>
     {% for post in post_list %}
         <h2>
             <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
