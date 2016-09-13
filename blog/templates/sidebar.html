@@ -1,4 +1,32 @@
-{% if request.get_full_path == '/' %}
+{% if request.get_full_path != '/' %}
+    {% if request.get_full_path == '/archives/' or request.get_full_path == '/aboutme/' %}
+    <hgroup class="column-left-menu">
+        <div class="text-center">
+            <img src="http://www.gravatar.com/avatar/4d420075a242b2c9b470b23ec2a914a0.png" alt="" class="img-responsive img-circle image-profile"/>
+        </div>
+        <h1 class="text-center">André Santos</h1>
+        <br>
+        <p class="text-center">
+            <a href="{% url 'home' %}">&larr;Home</a>
+        </p>
+    </hgroup>
+    {% else %}
+    <hgroup class="column-left-menu">
+        <div class="text-center">
+            <img src="http://www.gravatar.com/avatar/4d420075a242b2c9b470b23ec2a914a0.png" alt="" class="img-responsive img-circle image-profile"/>
+        </div>
+        <h1 class="text-center">André Santos</h1>
+        <strong>
+            <p class="text-center">Published:</p>
+        </strong>
+        <p class="text-center">{{ post.created_at|date:"D d F Y"}}</p>
+        <br>
+        <p class="text-center">
+            <a href="{% url 'home' %}">&larr;Home</a>
+        </p>
+    </hgroup>
+    {% endif %}
+{% else %}
     <hgroup class="column-left-menu">
         <img src="http://www.gravatar.com/avatar/4d420075a242b2c9b470b23ec2a914a0.png" alt="" class="img-responsive img-circle image-profile"/>
         <h1 class="text-center">
@@ -44,20 +72,5 @@
                     <i id="social-btn" class="fa fa-twitter fa-3x"></i>
                 </a>
             </div>
-    </hgroup>
-{% else %}
-    <hgroup class="column-left-menu">
-        <div class="text-center">
-            <img src="http://www.gravatar.com/avatar/4d420075a242b2c9b470b23ec2a914a0.png" alt="" class="img-responsive img-circle image-profile"/>
-        </div>
-        <h1 class="text-center">André Santos</h1>
-        <strong>
-            <p class="text-center">Published:</p>
-        </strong>
-        <p class="text-center">{{ post.created_at|date:"D d F Y"}}</p>
-        <br>
-        <p class="text-center">
-            <a href="{% url 'home' %}">&larr;Home</a>
-        </p>
     </hgroup>
 {% endif %}
