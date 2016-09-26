@@ -43,7 +43,7 @@ def media_responsive(value, size=None):
     pattern = re.compile(r'<img .*/>|<iframe .*></iframe>')
     medias = pattern.findall(value)
 
-    new_value = ''
+    new_value = None
 
     if len(medias) > 0:
         for tag in medias:
