@@ -15,6 +15,4 @@ tests/report/
 
 db.sqlite3
 venv/
-venv10/
-envs.py
-envs.sh
+static/*
