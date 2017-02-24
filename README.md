@@ -24,6 +24,7 @@
     $ python manage.py createsuperuser
     $ cd blog/static/
     $ bower install
+    $ cd ../..
     $ python manage.py runserver
 ```
 Open the browser and go to localhost:8000/admin to create the first post.
