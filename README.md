@@ -8,7 +8,7 @@
 
 ##Requirements
 
-- Python3.5.1
+- Python 3.6.0
 - Django==1.9.8
 - Bootstrap
 
