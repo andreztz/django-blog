@@ -1,5 +1,3 @@
-import datetime
-
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
 from .models import Article
@@ -16,6 +14,7 @@ class ArticleSiteMap(Sitemap):
     def lastmod(self, obj):
         return obj.updated_at
 
+
 class StaticSiteMap(Sitemap):
 
     lastmod = None
@@ -23,10 +22,11 @@ class StaticSiteMap(Sitemap):
     changefreq = 'weekly'
 
     def items(self):
-        return ['about_me',]
+        return ['about_me', ]
 
     def location(self, item):
         return reverse(item)
+
 
 class HomePageSiteMap(Sitemap):
     location = '/'
