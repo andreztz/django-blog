@@ -1,10 +1,10 @@
 {
-  "name": "DjangoBlog",
-  "homepage": "https://github.com/andreztz/DjangoBlog",
+  "name": "django-blog",
+  "homepage": "https://github.com/andreztz/django-blog",
   "authors": [
     "andreztz <andreztz@gmail.com>"
   ],
-  "description": "DjangoBlog",
+  "description": "django-blog",
   "main": "",
   "license": "MIT",
   "ignore": [
