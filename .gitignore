@@ -16,4 +16,5 @@ tests/report/
 db.sqlite3
 venv/
 static/*
-blog/static/libs/
+!static/.gitkeep
+blog/static/libs/*
