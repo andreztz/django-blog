@@ -109,6 +109,8 @@ def blog_search(request):
     return redirect('/')
 
 
+from .templatetags.custom_markdown import custom_markdown
+
 class RSSFeed(Feed):
     title = "RSS feed - article"
     link = "/feeds/posts/"
@@ -126,4 +128,4 @@ class RSSFeed(Feed):
         return item.created_at
 
     def item_description(self, item):
-        return item.content
+        return custom_markdown(item.content)
