@@ -19,8 +19,11 @@ from blog.models import UserProfile
 
 
 def home(request):
-    print(request.user)
-    posts = get_list_or_404(Article, draft=False)
+    if not request.user.is_authenticated():
+        posts = get_list_or_404(Article, draft=False)
+    else:
+        posts = get_list_or_404(Article)
+    # posts = get_list_or_404(Article, draft=False)
     paginator = Paginator(posts, 5)
     page = request.GET.get('page')
     try:
@@ -62,7 +65,11 @@ def detail(request, slug):
 
 
 def archives(request):
-    post_list = get_list_or_404(Article, draft=False)
+    if not request.user.is_authenticated():
+        post_list = get_list_or_404(Article, draft=False)
+    else:
+        post_list = get_list_or_404(Article)
+    # post_list = get_list_or_404(Article, draft=False)
     return render(
         request,
         'archives.html',
