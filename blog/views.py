@@ -17,13 +17,15 @@ from blog.models import Article
 from blog.models import Tag
 from blog.models import UserProfile
 
+from .templatetags.custom_markdown import custom_markdown
+
 
 def home(request):
+    # posts = get_list_or_404(Article, draft=False)
     if not request.user.is_authenticated():
         posts = get_list_or_404(Article, draft=False)
     else:
         posts = get_list_or_404(Article)
-    # posts = get_list_or_404(Article, draft=False)
     paginator = Paginator(posts, 5)
     page = request.GET.get('page')
     try:
@@ -65,11 +67,11 @@ def detail(request, slug):
 
 
 def archives(request):
+    # post_list = get_list_or_404(Article, draft=False)
     if not request.user.is_authenticated():
         post_list = get_list_or_404(Article, draft=False)
     else:
         post_list = get_list_or_404(Article)
-    # post_list = get_list_or_404(Article, draft=False)
     return render(
         request,
         'archives.html',
@@ -116,7 +118,7 @@ def blog_search(request):
     return redirect('/')
 
 
-from .templatetags.custom_markdown import custom_markdown
+
 
 class RSSFeed(Feed):
     title = "RSS feed - article"
