@@ -18,3 +18,4 @@ venv/
 static/*
 !static/.gitkeep
 blog/static/libs/*
+local_settings.py
