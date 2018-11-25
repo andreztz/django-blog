@@ -78,7 +78,7 @@ def search_tag(request, tag):
 
 
 def search_category(request, category):
-    print('category')
+    print("category")
     post_list = get_list_or_404(
         Article.objects.filter(draft=False).filter(category__iexact=category)
     )

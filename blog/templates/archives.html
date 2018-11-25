@@ -19,12 +19,12 @@
                             {{ post.date_time |date:'Y /m /d'}}
                         </a> &nbsp;&nbsp;
                     Category:
-                        <a href="{% url 'blog:search_tag' tag=post.category %}">
+                        <a href="{% url 'blog:search_category' category=post.category %}">
                             {{ post.category }}
                         </a> &nbsp; &nbsp;
                     Tag:
-                        {% for tag in post.tag.all %}
-                            <a class="" href="#">{{ tag }}</a>
+                        {% for tag in post.tag.all %}                            
+                            <a href="{% url 'blog:search_tag' tag=tag %}">{{ tag }}</a>
                         {% endfor %}
                 </p>
             </header>
