@@ -21,13 +21,13 @@
         <a href="#" style="line-height: 30px;">Published: {{ post.created_at|date:"D d F Y"}}</a>
         <ul class="tags">
             <!-- <li>
-                <a class="tag" href="{% url 'search_category' category=post.category %}">
+                <a class="tag" href="{% url 'blog:search_category' category=post.category %}">
                     { post.category }
                 </a>
             </li> -->
             {% for tag in post.tag.all %}
             <li>
-                <a class="tag" href="{% url 'search_tag' tag=tag %}">{{ tag }}</a>
+                <a class="tag" href="{% url 'blog:search_tag' tag=tag %}">{{ tag }}</a>
             </li>
             {% endfor %}
         </ul>

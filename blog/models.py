@@ -1,7 +1,5 @@
 from django.db import models
-from simplemde.fields import SimpleMDEField
-
-# Create your models here.
+from django.urls import reverse
 
 # from django.core.urlresolvers import reverse
 # from django.contrib.sites.models import Site
@@ -9,11 +7,13 @@ from simplemde.fields import SimpleMDEField
 from django.utils.html import format_html
 from django.contrib.auth.models import User
 
+from simplemde.fields import SimpleMDEField
+
 
 class UserProfile(models.Model):
 
     name = models.CharField(max_length=50, blank=True)
-    picture = models.ImageField(upload_to='profile_image', blank=True)
+    picture = models.ImageField(upload_to="profile_image", blank=True)
     description = SimpleMDEField(blank=True, null=True)
 
     def __str__(self):
@@ -26,14 +26,12 @@ class SocialMedia(models.Model):
     url = models.URLField(max_length=200, blank=True)
 
     def __str__(self):
-        return '{}'.format(self.social)
+        return "{}".format(self.social)
 
     @property
     def link(self):
         return format_html(
-            '<a href="{}"  target="_blank">{}</a>',
-            self.url,
-            self.social
+            '<a href="{}"  target="_blank">{}</a>', self.url, self.social
         )
 
 
@@ -42,7 +40,7 @@ class Tag(models.Model):
     tag_name = models.CharField(max_length=64)
 
     def __str__(self):
-        return '{}'.format(self.tag_name)
+        return "{}".format(self.tag_name)
 
 
 class Article(models.Model):
@@ -52,21 +50,16 @@ class Article(models.Model):
     tag = models.ManyToManyField(Tag, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     content = SimpleMDEField(blank=True, null=True)
-    slug = models.SlugField('Slug')
+    slug = models.SlugField("Slug")
     draft = models.BooleanField(default=False)
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    updated_at = models.DateTimeField(auto_now=True)
 
-    # def get_absolute_url(self):
-    #     return '/{}'.format(self.id)
-    @models.permalink
     def get_absolute_url(self):
-        return ('detail', (), {'slug': self.slug})
+        return reverse("blog:detail", kwargs={"slug": self.slug})
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return "{}".format(self.title)
 
     class Meta:
         # app_label = 'article'
-        ordering = ['-created_at']
+        ordering = ["-created_at"]

@@ -25,12 +25,12 @@
                 {{ post.created_at|date:"D d F Y"}}
             </a> &nbsp;&nbsp;
             Category:
-            <a href="{% url 'search_category' category=post.category %}">
+            <a href="{% url 'blog:search_category' category=post.category %}">
                 {{ post.category|title }}
             </a> &nbsp;&nbsp;
             Tags:
                 {% for tag in post.tag.all %}
-                    <a href="{% url 'search_tag' tag=tag %}">{{ tag }}</a>
+                    <a href="{% url 'blog:search_tag' tag=tag %}">{{ tag }}</a>
                 {% endfor %}
         </p>
         <hr>

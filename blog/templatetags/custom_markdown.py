@@ -15,17 +15,19 @@ register = template.Library()
 @stringfilter
 def custom_markdown(value):
     extensions = [
-        'markdown.extensions.fenced_code',
-        'markdown.extensions.codehilite',
-        'video'
+        "markdown.extensions.fenced_code",
+        "markdown.extensions.codehilite",
+        # 'video'
     ]
-    return mark_safe(markdown.markdown(
-        value,
-        extensions=extensions,
-        safe_mode=False,
-        enable_attributes=False)
+    return mark_safe(
+        markdown.markdown(
+            value,
+            extensions=extensions,
+            safe_mode=False,
+            enable_attributes=False,
+        )
     )
 
+    # return mark_safe(markdown2.markdown(force_text(value),
+    # extras=["fenced-code-blocks", "cuddled-lists", "metadata", "tables", "spoiler"]))
 
-    #return mark_safe(markdown2.markdown(force_text(value),
-       #extras=["fenced-code-blocks", "cuddled-lists", "metadata", "tables", "spoiler"]))

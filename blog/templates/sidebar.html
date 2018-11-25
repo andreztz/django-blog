@@ -1,7 +1,7 @@
 <hgroup class="column-left-menu">
     <img src="http://www.gravatar.com/avatar/4d420075a242b2c9b470b23ec2a914a0.png" alt="" class="img-responsive img-circle image-profile"/>
     <h1 class="text-center">
-        <a href="{% url 'home' %}">André Santos Blog</a>
+        <a href="{% url 'blog:home' %}">André Santos Blog</a>
     </h1>
     <br>
     <div class="menu-sidebar text-center">
@@ -15,21 +15,21 @@
         <ul class="dropdown">
             {% if request.get_full_path != '/' %}
             <li>
-                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'blog:home' %}">Home</a>
             </li>
             {% endif %}
             {% if  request.get_full_path != '/aboutme/' %}
             <li>
-                <a href="{% url 'about_me' %}">About Me</a>
+                <a href="{% url 'blog:about_me' %}">About Me</a>
             </li>
             {% endif %}
             {% if  request.get_full_path != '/archives/' %}
             <li>
-                <a href="{% url 'archives' %}">Archive</a>
+                <a href="{% url 'blog:archives' %}">Archive</a>
             </li>
             {% endif %}
             <li>
-                <a href="{% url 'RSS' %}" target="_blank">RSS</a>
+                <a href="{% url 'blog:RSS' %}" target="_blank">RSS</a>
             </li>
         </ul>
     </div>

@@ -19,7 +19,7 @@
                             {{ post.date_time |date:'Y /m /d'}}
                         </a> &nbsp;&nbsp;
                     Category:
-                        <a href="{% url 'search_tag' tag=post.category %}">
+                        <a href="{% url 'blog:search_tag' tag=post.category %}">
                             {{ post.category }}
                         </a> &nbsp; &nbsp;
                     Tag:
