@@ -17,7 +17,6 @@ def custom_markdown(value):
     extensions = [
         "markdown.extensions.fenced_code",
         "markdown.extensions.codehilite",
-        # 'video'
     ]
     return mark_safe(
         markdown.markdown(
@@ -27,7 +26,4 @@ def custom_markdown(value):
             enable_attributes=False,
         )
     )
-
-    # return mark_safe(markdown2.markdown(force_text(value),
-    # extras=["fenced-code-blocks", "cuddled-lists", "metadata", "tables", "spoiler"]))
 

@@ -1,37 +1,34 @@
 {% extends "base.html" %}
-
 {% load media_responsive %}
-{% load custom_markdown %}
-
 {% block content %}
-    <header class="content-subhead">
-        edited &rarr;
-        <a class="">
-            {{ post.updated_at | date:'d/m/Y' }}
-        </a>
-    </header>
+<header class="content-subhead">
+    edited &rarr;
+    <a class="">
+        {{ post.updated_at | date:'d/m/Y' }}
+    </a>
+</header>
+<br>
+<article class="well text-justify">
+    <h1>{{ post.title }}</h1>
     <br>
-    <article class="well text-justify">
-        <h1>{{ post.title }}</h1>
-        <br>
-        <p>{{ post.content|custom_markdown|media_responsive}}</p>
-        <br>
-    </article>
-    <div class="col-xs-12" style="padding-left: 0;">
-        <a href="#" style="line-height: 30px;">Published: {{ post.created_at|date:"D d F Y"}}</a>
-        <ul class="tags">
-            <!-- <li>
+    <p>{{ post.body }}</p>
+    <br>
+</article>
+<div class="col-xs-12" style="padding-left: 0;">
+    <a href="#" style="line-height: 30px;">Published: {{ post.created_at|date:"D d F Y"}}</a>
+    <ul class="tags">
+        <!-- <li>
                 <a class="tag" href="{% url 'blog:search_category' category=post.category %}">
                     { post.category }
                 </a>
             </li> -->
-            {% for tag in post.tag.all %}
-            <li>
-                <a class="tag" href="{% url 'blog:search_tag' tag=tag %}">{{ tag }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-	</div>
-{% include "duoshuo.html" %}
+        {% for tag in post.tag.all %}
+        <li>
+            <a class="tag" href="{% url 'blog:search_tag' tag=tag %}">{{ tag }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% include "comments.html" %}
 <a href="#" class="go-top">Go Top</a>
 {% endblock %}

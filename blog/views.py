@@ -4,11 +4,9 @@ from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 
-# from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
 
-# from django.http import JsonResponse
 
 from django.shortcuts import get_list_or_404
 from django.shortcuts import get_object_or_404
@@ -19,11 +17,12 @@ from blog.models import Article
 from blog.models import Tag
 from blog.models import UserProfile
 
-from .templatetags.custom_markdown import custom_markdown
+
+from .templatetags.markdownify import markdown
 
 
 def home(request):
-    # posts = get_list_or_404(Article, draft=False)
+
     if not request.user.is_authenticated:
         posts = get_list_or_404(Article, draft=False)
     else:
@@ -60,7 +59,7 @@ def detail(request, slug):
 
 
 def archives(request):
-    # post_list = get_list_or_404(Article, draft=False)
+
     if not request.user.is_authenticated:
         post_list = get_list_or_404(Article, draft=False)
     else:
@@ -126,4 +125,4 @@ class RSSFeed(Feed):
         return item.created_at
 
     def item_description(self, item):
-        return custom_markdown(item.content)
+        return markdown(item.content)

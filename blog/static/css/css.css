@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Covered+By+Your+Grace);
 @import url(tags.css);
 
+
 h1 {
     font-size: 25pt;
 }
@@ -200,7 +201,24 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     background-color: rgba(84, 78, 78, 0.35);
 }
 
+.highlight {
+    border-radius: 4px;
+    font-size: 14px;
+}
 
+/* fix bootstrap conflict with Pygments */
+.highlight pre {
+    white-space: pre;
+    border-radius: inherit;
+    display: inherit;
+    background-color: inherit;
+    border: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+
+/* fix conflict with other sytlesheets */
+.highlight .m { margin: inherit; }
 
 @media (min-width: 960px), handheld and (orientation: landscape) {
     .column-left {

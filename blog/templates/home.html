@@ -2,58 +2,62 @@
 
 {% load media_first %}
 {% load media_responsive %}
-{% load custom_markdown %}
-{% load read_more %}
 {% block content %}
+
 <div class="content-subhead">Latest Posts</div>
 
 {% for post in post_list %}
-        <header>
-            <h2>
-                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-            </h2>
-        </header>
-        <div class="text-justify">
-            <p>
-                {{ post.content|custom_markdown|media_responsive:400|media_first|truncatewords_html:100|read_more:post.get_absolute_url }}
-            </p>
-        </div>
-        <br>
-        <p class="small post-meta">
-            Published:
-            <a href="#">
-                {{ post.created_at|date:"D d F Y"}}
-            </a> &nbsp;&nbsp;
-            Category:
-            <a href="{% url 'blog:search_category' category=post.category %}">
-                {{ post.category|title }}
-            </a> &nbsp;&nbsp;
-            Tags:
-                {% for tag in post.tag.all %}
-                    <a href="{% url 'blog:search_tag' tag=tag %}">{{ tag }}</a>
-                {% endfor %}
-        </p>
-        <hr>
-    {% empty %}
-        <p>Sorry, no article in this Blog!!.</p>
+<header>
+    <h2>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    </h2>
+</header>
+<div class="text-justify">
+    <p>
+        {% if post.summary %}
+        <img src="{{ post.summary.image | safe }}" alt="">
+        <p>{{ post.summary.summary | safe }}</p>
+        {% else %}
+        {{ post.body | truncatewords_html:100 }}
+        {% endif %}
+    </p>
+</div>
+<br>
+<p class=" small post-meta">
+    Published:
+    <a href="#">
+        {{ post.created_at|date:"D d F Y"}}
+    </a> &nbsp;&nbsp;
+    Category:
+    <a href="{% url 'blog:search_category' category=post.category %}">
+        {{ post.category|title }}
+    </a> &nbsp;&nbsp;
+    Tags:
+    {% for tag in post.tag.all %}
+    <a href="{% url 'blog:search_tag' tag=tag %}">{{ tag }}</a>
+    {% endfor %}
+</p>
+<hr>
+{% empty %}
+<p>Sorry, no article in this Blog!!.</p>
 {% endfor %}
 
 {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
-    <div>
-        <ul class="pagination">
-            {% if post_list.has_previous %}
-                <li>
-                    <a href="?page={{ post_list.previous_page_number }}">❮</a>
-                </li>
-            {% endif %}
+<div>
+    <ul class="pagination">
+        {% if post_list.has_previous %}
+        <li>
+            <a href="?page={{ post_list.previous_page_number }}">❮</a>
+        </li>
+        {% endif %}
 
-            {% if post_list.has_next %}
-                <li>
-                    <a href="?page={{ post_list.next_page_number }}">❯</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
+        {% if post_list.has_next %}
+        <li>
+            <a href="?page={{ post_list.next_page_number }}">❯</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
 {% endif %}
 
 <a href="#" class="go-top">Go Top</a>

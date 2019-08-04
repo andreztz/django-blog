@@ -1,72 +1,77 @@
 {% extends "admin/base.html" %}
+
 {% load admin_static %}
 
+
 {% block extrastyle %}
-  <style type="text/css">
-    /* DATE AND TIME */
-    p.datetime {
-      line-height: 20px;
-      margin: 0;
-      padding: 0;
-      color: #666;
-      font-weight: bold;
-    }
+<style type="text/css">
+  /* DATE AND TIME */
+  p.datetime {
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    color: #666;
+    font-weight: bold;
+  }
 
-    .datetime span {
-      white-space: nowrap;
-      font-weight: normal;
-      font-size: 11px;
-      color: #ccc;
-    }
+  .datetime span {
+    white-space: nowrap;
+    font-weight: normal;
+    font-size: 11px;
+    color: #ccc;
+  }
 
-    .datetime input, .form-row .datetime input.vDateField, .form-row .datetime input.vTimeField {
-      min-width: 0;
-      margin-left: 5px;
-      margin-bottom: 4px;
-    }
+  .datetime input,
+  .form-row .datetime input.vDateField,
+  .form-row .datetime input.vTimeField {
+    min-width: 0;
+    margin-left: 5px;
+    margin-bottom: 4px;
+  }
 
-    table p.datetime {
-      font-size: 11px;
-      margin-left: 0;
-      padding-left: 0;
-    }
+  table p.datetime {
+    font-size: 11px;
+    margin-left: 0;
+    padding-left: 0;
+  }
 
-    .datetimeshortcuts .clock-icon, .datetimeshortcuts .date-icon {
-      position: relative;
-      display: inline-block;
-      vertical-align: middle;
-      height: 16px;
-      width: 16px;
-      overflow: hidden;
-    }
+  .datetimeshortcuts .clock-icon,
+  .datetimeshortcuts .date-icon {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    height: 16px;
+    width: 16px;
+    overflow: hidden;
+  }
 
-    .datetimeshortcuts .clock-icon {
-      background: url({% static "admin/img/icon-clock.svg" %}) 0 0 no-repeat;
-    }
+  .datetimeshortcuts .clock-icon {
+    background: url({% static "admin/img/icon-clock.svg" %}) 0 0 no-repeat;
+  }
 
-    .datetimeshortcuts a:focus .clock-icon,
-    .datetimeshortcuts a:hover .clock-icon {
-      background-position: 0 -16px;
-    }
+  .datetimeshortcuts a:focus .clock-icon,
+  .datetimeshortcuts a:hover .clock-icon {
+    background-position: 0 -16px;
+  }
 
-    .datetimeshortcuts .date-icon {
-      background: url({% static "admin/img/icon-calendar.svg" %}) 0 0 no-repeat;
-      top: -1px;
-    }
+  .datetimeshortcuts .date-icon {
+    background: url({% static "admin/img/icon-calendar.svg" %}) 0 0 no-repeat;
+    top: -1px;
+  }
 
-    .datetimeshortcuts a:focus .date-icon,
-    .datetimeshortcuts a:hover .date-icon {
-      background-position: 0 -16px;
-    }
+  .datetimeshortcuts a:focus .date-icon,
+  .datetimeshortcuts a:hover .date-icon {
+    background-position: 0 -16px;
+  }
 
-    .timezonewarning {
-      font-size: 11px;
-      color: #999;
-    }
-  </style>
+  .timezonewarning {
+    font-size: 11px;
+    color: #999;
+  }
+</style>
 {% endblock extrastyle %}
 
 {% block jquery %}
-  <script type="text/javascript" src="{% static "admin/js/vendor/jquery/jquery.js" %}"></script>
-  <script type="text/javascript" src="{% static "admin/js/jquery.init.js" %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
 {% endblock jquery %}

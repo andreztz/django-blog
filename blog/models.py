@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.html import mark_safe
 
 # from django.core.urlresolvers import reverse
 # from django.contrib.sites.models import Site
@@ -8,6 +9,9 @@ from django.utils.html import format_html
 from django.contrib.auth.models import User
 
 from simplemde.fields import SimpleMDEField
+
+from . import meta
+from .templatetags.markdownify import markdown
 
 
 class UserProfile(models.Model):
@@ -56,6 +60,24 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"slug": self.slug})
+
+    @property
+    def summary(self):
+        subs = '<a class="small" href="{}"> read more...</a>'.format(
+            self.get_absolute_url()
+        )
+
+        metas, _ = meta.parse(self.content)
+        if metas:
+            metas["summary"] = metas["summary"][::-1].replace(
+                "...", subs[::-1], 1
+            )[::-1]
+        return metas
+
+    @property
+    def body(self):
+        _, content = meta.parse(self.content)
+        return mark_safe(markdown(content))
 
     def __str__(self):
         return "{}".format(self.title)
