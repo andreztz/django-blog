@@ -1,15 +1,26 @@
 @import url(https://fonts.googleapis.com/css?family=Covered+By+Your+Grace);
 @import url(tags.css);
 
-
-h1 {
-    font-size: 25pt;
+body {
+    font-family: Hack, 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: 400;
+    color: #222;
+    padding: 0;
+    margin: 0;
 }
 
-h2 {
-    font-size: 18pt;
+section h1 {
+    font-size: 21pt;
 }
 
+section h2 {
+    font-size: 14pt;
+}
+
+section h3 {
+    font-size: 11pt;
+}
 .column-left {
     background-image: url('../images/image.jpg');
     background-size: cover;
@@ -31,17 +42,7 @@ h2 {
     padding: 5% 5% 0 5%;
 }
 
-#article {
-    /* background-color: #f1f1f1; */
-    background-color: #fff;
-    font-family: Hack, 'Courier New', Courier, monospace;
-    font-size: 14px;
-    font-weight: 400;
-    color: #222;
-    padding: 2.5%;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
-    border-radius: 4px;
-}
+
 .social-icons {
     font-size: 8pt;
     text-align: center;
@@ -62,6 +63,15 @@ h2 {
     font-weight: 500;
     letter-spacing: 0.1em;
 }
+
+#article {
+    /* background-color: #f1f1f1; */
+    background-color: #fff;
+    padding: 2.5%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+    border-radius: 4px;
+}
+
 .post-meta {
     color: #999;
     font-size: 90%;
