@@ -8,9 +8,9 @@
 
 {% for post in post_list %}
 <header>
-    <h2>
+    <h1>
         <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-    </h2>
+    </h1>
 </header>
 <div class="text-justify">
     <p>
@@ -18,7 +18,7 @@
         <img src="{{ post.summary.image | safe }}" alt="">
         <p>{{ post.summary.summary | safe }}</p>
         {% else %}
-        {{ post.body | truncatewords_html:100 }}
+        {{ post.body | truncatewords_html:50 }}
         {% endif %}
     </p>
 </div>
