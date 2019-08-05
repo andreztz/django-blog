@@ -12,6 +12,7 @@ from django.shortcuts import get_list_or_404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.shortcuts import render_to_response
 
 from blog.models import Article
 from blog.models import Tag
@@ -24,9 +25,12 @@ from .templatetags.markdownify import markdown
 def home(request):
 
     if not request.user.is_authenticated:
-        posts = get_list_or_404(Article, draft=False)
+        # posts = get_list_or_404(Article, draft=False)
+        posts = Article.objects.exclude(draft=True)
     else:
-        posts = get_list_or_404(Article)
+        # posts = get_list_or_404(Article)
+        posts = Article.objects.all()
+
     paginator = Paginator(posts, 5)
     page = request.GET.get("page")
     try:
@@ -53,17 +57,21 @@ def about_me(request):
 
 
 def detail(request, slug):
-    post = get_object_or_404(Article, slug=slug)
-    tags = get_list_or_404(Tag)
+    # post = get_object_or_404(Article, slug=slug)
+    post = Article.objects.get(slug=slug)
+    # tags = get_list_or_404(Tag)
+    tags = Tag.objects.all()  # ???? post.tag.all()
     return render(request, "post.html", {"post": post, "tags": tags})
 
 
 def archives(request):
 
     if not request.user.is_authenticated:
-        post_list = get_list_or_404(Article, draft=False)
+        # post_list = get_list_or_404(Article, draft=False)
+        post_list = Article.objects.exclude(draft=True)
     else:
-        post_list = get_list_or_404(Article)
+        # post_list = get_list_or_404(Article)
+        post_list = Article.objects.all()
     return render(
         request, "archives.html", {"post_list": post_list, "error": False}
     )
@@ -77,7 +85,6 @@ def search_tag(request, tag):
 
 
 def search_category(request, category):
-    print("category")
     post_list = get_list_or_404(
         Article.objects.filter(draft=False).filter(category__iexact=category)
     )
