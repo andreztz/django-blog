@@ -10,3 +10,4 @@ static3==0.7.0
 mistune==0.8.4
 ipython==7.7.0
 django-extensions==2.2.1
+Markdown==3.2.2
