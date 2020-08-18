@@ -2,25 +2,28 @@
 @import url(tags.css);
 
 body {
-    font-family: Hack, 'Courier New', Courier, monospace;
-    font-size: 15px;
+    font-family: source sans pro,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji;
+    font-size: 1.75rem;
     font-weight: 400;
-    line-height: 1.6;
-    color: #222;
+    line-height: 2.7rem;
+    color: #212529;
     padding: 0;
     margin: 0;
 }
 
 section h1 {
-    font-size: 21pt;
+    font-size: 3.125rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
 }
 
-section h2 {
-    font-size: 14pt;
+section h2 a {
+    font-weight: 600;
 }
 
 section h3 {
-    font-size: 11pt;
+    font-size: 1em;
 }
 .column-left {
     background-image: url('../images/image.jpg');
@@ -32,6 +35,9 @@ section h3 {
 .column-left hgroup h1 {
     font-family: 'Covered By Your Grace', cursive;
 }
+h1.text-center > a:nth-child(1) {
+    font-size: 4.5rem;
+}
 .column-left-social {
     bottom: 0 !important;
 }
@@ -42,13 +48,16 @@ section h3 {
     padding-top: 20px;
     padding: 5% 5% 0 5%;
 }
-
-
 .social-icons {
     font-size: 8pt;
     text-align: center;
     padding-top: 10vh;
-    padding-bottom: 10px;
+    padding-bottom: 2em;
+}
+
+
+.social > a {
+    font-size: smaller;
 }
 .image-profile {
     max-width: 125px !important;
@@ -66,7 +75,6 @@ section h3 {
 }
 
 #article {
-    /* background-color: #f1f1f1; */
     background-color: #fff;
     padding: 2.5%;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
@@ -164,7 +172,8 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     display: block;
     width: 25px;
     height: 3px;
-    background: rgba(51, 122, 183, 0.94);
+    /* background: rgba(51, 122, 183, 0.94); */
+    background: #4c9aff;
     margin: 5px auto;
     transition: transform .2s, width .2s;
 }
@@ -216,11 +225,13 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     padding: 15px 25px;
     text-decoration: none;
     display: block;
-    font-size: 11pt;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .dropdown a:hover {
     background-color: rgba(84, 78, 78, 0.35);
+    color: #337ab7 !important;
 }
 
 .highlight {
@@ -238,10 +249,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     color: inherit;
     /* Custom font */
     font-family: monaco, Consolas, monospace;
-    font-style: normal;
-    font-size: 1.50rem;
-    font-weight: 400;
-    line-height: 1.7;
+    font-size: smaller;
   }
 
 /* fix conflict with other sytlesheets */
