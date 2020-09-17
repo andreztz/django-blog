@@ -1,13 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.html import mark_safe
-
-# from django.core.urlresolvers import reverse
-# from django.contrib.sites.models import Site
-
 from django.utils.html import format_html
-from django.contrib.auth.models import User
-
 from simplemde.fields import SimpleMDEField
 
 from . import meta
@@ -47,6 +41,11 @@ class Tag(models.Model):
         return "{}".format(self.tag_name)
 
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().exclude(draft=True)
+
+
 class Article(models.Model):
 
     title = models.CharField(max_length=100)
@@ -57,6 +56,8 @@ class Article(models.Model):
     slug = models.SlugField("Slug")
     draft = models.BooleanField(default=False)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+    published = PublishedManager()
 
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"slug": self.slug})
@@ -83,5 +84,4 @@ class Article(models.Model):
         return "{}".format(self.title)
 
     class Meta:
-        # app_label = 'article'
         ordering = ["-created_at"]

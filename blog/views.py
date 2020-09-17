@@ -3,47 +3,45 @@ from django.core import serializers
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
-
-from django.http import Http404
 from django.http import HttpResponse
-
-
 from django.shortcuts import get_list_or_404
-from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.shortcuts import render_to_response
-
 from blog.models import Article
 from blog.models import Tag
 from blog.models import UserProfile
-
 
 from .templatetags.markdownify import markdown
 
 
 def home(request):
 
-    if not request.user.is_authenticated:
-        # posts = get_list_or_404(Article, draft=False)
-        posts = Article.objects.exclude(draft=True)
-    else:
-        # posts = get_list_or_404(Article)
+    if request.user.is_authenticated:
         posts = Article.objects.all()
+    else:
+        posts = Article.published.all()
 
     paginator = Paginator(posts, 5)
     page = request.GET.get("page")
+
     try:
         post_list = paginator.page(page)
     except PageNotAnInteger:
         post_list = paginator.page(1)
     except EmptyPage:
         post_list = paginator.paginator(paginator.num_pages)
+
     return render(request, "home.html", {"post_list": post_list})
 
 
+def detail(request, slug):
+    post = Article.objects.get(slug=slug)
+    tags = Tag.objects.all()
+    return render(request, "post.html", {"post": post, "tags": tags})
+
+
 def serial(request):
-    posts = get_list_or_404(Article, draft=False)
+    posts = get_list_or_404(Article.published)
     return HttpResponse(
         serializers.serialize("json", posts), content_type="application/json"
     )
@@ -56,38 +54,38 @@ def about_me(request):
     return render(request, "aboutme.html", context)
 
 
-def detail(request, slug):
-    # post = get_object_or_404(Article, slug=slug)
-    post = Article.objects.get(slug=slug)
-    # tags = get_list_or_404(Tag)
-    tags = Tag.objects.all()  # ???? post.tag.all()
-    return render(request, "post.html", {"post": post, "tags": tags})
-
-
 def archives(request):
 
-    if not request.user.is_authenticated:
-        # post_list = get_list_or_404(Article, draft=False)
-        post_list = Article.objects.exclude(draft=True)
-    else:
-        # post_list = get_list_or_404(Article)
+    if request.user.is_authenticated:
         post_list = Article.objects.all()
+    else:
+        post_list = Article.published.all()
     return render(
         request, "archives.html", {"post_list": post_list, "error": False}
     )
 
 
 def search_tag(request, tag):
-    post_list = get_list_or_404(
-        Article.objects.filter(draft=False).filter(tag__tag_name__iexact=tag)
-    )
+    if request.user.is_authenticated:
+        post_list = get_list_or_404(
+            Article.objects.all().filter(tag__tag_name__iexact=tag)
+        )
+    else:
+        post_list = get_list_or_404(
+            Article.published.filter(tag__tag_name__iexact=tag)
+        )
     return render(request, "tag.html", {"post_list": post_list})
 
 
 def search_category(request, category):
-    post_list = get_list_or_404(
-        Article.objects.filter(draft=False).filter(category__iexact=category)
-    )
+    if request.user.is_authenticated:
+        post_list = get_list_or_404(
+            Article.objects.all().filter(category__iexact=category)
+        )
+    else:
+        post_list = get_list_or_404(
+            Article.published.filter(category__iexact=category)
+        )
     return render(request, "tag.html", {"post_list": post_list})
 
 
@@ -116,14 +114,12 @@ def blog_search(request):
 
 
 class RSSFeed(Feed):
-    title = "RSS feed - article"
+    title = "RSS feed - Articles"
     link = "/feeds/posts/"
-    description = "RSS feed - blog posts"
+    description = "RSS feed - Blog Posts"
 
     def items(self):
-        return get_list_or_404(
-            Article.objects.filter(draft=False).order_by("-created_at")
-        )
+        return get_list_or_404(Article.published.all())
 
     def items_title(self, item):
         return item.title
