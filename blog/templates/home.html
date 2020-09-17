@@ -1,11 +1,8 @@
 {% extends "base.html" %}
-
 {% load media_first %}
 {% load media_responsive %}
 {% block content %}
-
 <div class="content-subhead">Latest Posts</div>
-
 {% for post in post_list %}
 <header>
     <h2>
@@ -22,7 +19,6 @@
         {% endif %}
     </p>
 </div>
-<br>
 <p class=" small post-meta">
     Published:
     <a href="#">
@@ -41,7 +37,6 @@
 {% empty %}
 <p>Sorry, no article in this Blog!!.</p>
 {% endfor %}
-
 {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
 <div>
     <ul class="pagination">
@@ -59,6 +54,5 @@
     </ul>
 </div>
 {% endif %}
-
 <a href="#" class="go-top">Go Top</a>
 {% endblock %}
