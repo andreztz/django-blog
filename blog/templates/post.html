@@ -1,21 +1,16 @@
 {% extends "base.html" %}
-
 {% block content %}
-<header class="content-subhead">
-    edited &rarr;
-    <a class="">
-        {{ post.updated_at | date:'d/m/Y' }}
-    </a>
-</header>
-<br>
-<article class="text-justify" id="article">
-    <h1>{{ post.title }}</h1>
-    <br>
-    <p>{{ post.body }}</p>
-    <br>
-</article>
-<div class="col-xs-12" style="padding-left: 0;">
-    <a href="#" style="line-height: 30px;">Published: {{ post.created_at|date:"D d F Y"}}</a>
+    <header class="content-subhead">
+        edited &rarr;
+        <a class="">
+            {{ post.updated_at | date:'d/m/Y' }}
+        </a>
+    </header>
+    <article class="article">
+        <h1>{{ post.title }}</h1>
+        <p class="text-justify">{{ post.body }}</p>
+    </article>
+    <hr>
     <ul class="tags">
         <!-- <li>
                 <a class="tag" href="{% url 'blog:search_category' category=post.category %}">
@@ -28,7 +23,7 @@
         </li>
         {% endfor %}
     </ul>
-</div>
-{% include "comments.html" %}
-<a href="#" class="go-top">Go Top</a>
+    <a href="#">Published: {{ post.created_at|date:"D d F Y"}}</a>
+    {% include "comments.html" %}
+    <a href="#" class="go-top">Go Top</a>
 {% endblock %}

@@ -7,8 +7,6 @@ body {
     font-weight: 400;
     line-height: 2.7rem;
     color: #212529;
-    padding: 0;
-    margin: 0;
 }
 
 section h1 {
@@ -31,18 +29,16 @@ section h3 {
     background-repeat: no-repeat;
     color: #fff;
 }
-
-.column-left hgroup h1 {
-    font-family: 'Covered By Your Grace', cursive;
+.blog-title {
+    font-family: 'Covered By Your Grace', cursive !important;
 }
-h1.text-center > a:nth-child(1) {
+.blog-title > a:nth-child(1) {
     font-size: 4.5rem;
 }
-.column-left-social {
-    bottom: 0 !important;
-}
+
 .column-left-menu {
-    margin-top: 10vh;
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
 .column-right {
     padding-top: 20px;
@@ -50,12 +46,8 @@ h1.text-center > a:nth-child(1) {
 }
 .social-icons {
     font-size: 8pt;
-    text-align: center;
-    padding-top: 10vh;
-    padding-bottom: 2em;
+    margin-top: 5em;
 }
-
-
 .social > a {
     font-size: smaller;
 }
@@ -63,7 +55,6 @@ h1.text-center > a:nth-child(1) {
     max-width: 125px !important;
     margin: auto;
 }
-
 .content-subhead {
     text-transform: uppercase;
     color: #aaa;
@@ -73,12 +64,8 @@ h1.text-center > a:nth-child(1) {
     font-weight: 500;
     letter-spacing: 0.1em;
 }
-
-#article {
-    background-color: #fff;
-    padding: 2.5%;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
-    border-radius: 4px;
+.article {
+    word-break: break-word;
 }
 
 .post-meta {
@@ -86,7 +73,6 @@ h1.text-center > a:nth-child(1) {
     font-size: 90%;
     margin-top: -10px;
 }
-
 .post-category {
     margin: 0 0.1em;
     padding: 0.4em 0.6em;
@@ -258,25 +244,21 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 @media (min-width: 960px), handheld and (orientation: landscape) {
     .column-left {
         position: fixed;
-        height: 100vh;
-
+        height: 100%;
+        /* overflow:hidden; */
     }
     .column-right {
         padding-top: 20px;
         padding: 5% 5% 0 5%%;
         margin-left: 25%;
-    }
-    .column-left-social {
-        position: absolute !important;
-        width: 100%;
-
+        /* overflow:hidden; */
     }
     .column-left-menu {
-        margin-top: 40vh
+        margin-top: 65%;
     }
     .social-icons {
         text-align: center;
-        padding: 10px;
+        /* padding: 10px; */
+        margin-top: 45%;
     }
-
 }
