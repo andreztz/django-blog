@@ -43,10 +43,16 @@ class Tag(models.Model):
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().exclude(draft=True)
+        return (
+            super().get_queryset().exclude(status='draft'))
 
 
 class Article(models.Model):
+
+    STATUS_CHOICE = (
+        ("draft", "Draft"),
+        ("published", "Published"),
+    )
 
     title = models.CharField(max_length=100)
     category = models.CharField(max_length=50, blank=True)
@@ -54,7 +60,9 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     content = SimpleMDEField(blank=True, null=True)
     slug = models.SlugField("Slug")
-    draft = models.BooleanField(default=False)
+    status = models.CharField(
+        max_length=10, choices=STATUS_CHOICE, default="draft"
+    )
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
     published = PublishedManager()

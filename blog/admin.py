@@ -9,7 +9,7 @@ from blog.models import SocialMedia
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'created_at', 'updated_at','draft')
+    list_display = ('title', 'category', 'created_at', 'updated_at','status')
     search_fields = ('title', 'category', 'tag', 'content')
     list_filter = ('created_at',)
     # raw_id_fields = ('tag',)
