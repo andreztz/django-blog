@@ -7,9 +7,10 @@ from django.http import HttpResponse
 from django.shortcuts import get_list_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
-from blog.models import Article
-from blog.models import Tag
-from blog.models import UserProfile
+
+from .models import Post
+from .models import Tag
+from .models import UserProfile
 
 from .templatetags.markdownify import markdown
 
@@ -17,9 +18,9 @@ from .templatetags.markdownify import markdown
 def home(request):
 
     if request.user.is_authenticated:
-        posts = Article.objects.all()
+        posts = Post.objects.all()
     else:
-        posts = Article.published.all()
+        posts = Post.published.all()
 
     paginator = Paginator(posts, 5)
     page = request.GET.get("page")
@@ -35,13 +36,13 @@ def home(request):
 
 
 def detail(request, slug):
-    post = Article.objects.get(slug=slug)
+    post = Post.objects.get(slug=slug)
     tags = Tag.objects.all()
     return render(request, "post.html", {"post": post, "tags": tags})
 
 
 def serial(request):
-    posts = get_list_or_404(Article.published)
+    posts = get_list_or_404(Post.published)
     return HttpResponse(
         serializers.serialize("json", posts), content_type="application/json"
     )
@@ -57,9 +58,9 @@ def about_me(request):
 def archives(request):
 
     if request.user.is_authenticated:
-        post_list = Article.objects.all()
+        post_list = Post.objects.all()
     else:
-        post_list = Article.published.all()
+        post_list = Post.published.all()
     return render(
         request, "archives.html", {"post_list": post_list, "error": False}
     )
@@ -68,11 +69,11 @@ def archives(request):
 def search_tag(request, tag):
     if request.user.is_authenticated:
         post_list = get_list_or_404(
-            Article.objects.all().filter(tag__tag_name__iexact=tag)
+            Post.objects.all().filter(tag__tag_name__iexact=tag)
         )
     else:
         post_list = get_list_or_404(
-            Article.published.filter(tag__tag_name__iexact=tag)
+            Post.published.filter(tag__tag_name__iexact=tag)
         )
     return render(request, "tag.html", {"post_list": post_list})
 
@@ -80,11 +81,11 @@ def search_tag(request, tag):
 def search_category(request, category):
     if request.user.is_authenticated:
         post_list = get_list_or_404(
-            Article.objects.all().filter(category__iexact=category)
+            Post.objects.all().filter(category__iexact=category)
         )
     else:
         post_list = get_list_or_404(
-            Article.published.filter(category__iexact=category)
+            Post.published.filter(category__iexact=category)
         )
     return render(request, "tag.html", {"post_list": post_list})
 
@@ -96,7 +97,7 @@ def blog_search(request):
             return render(request, "home.html")
     else:
         post_list = get_list_or_404(
-            Article.objects.filter(title__icontains=search)
+            Post.objects.filter(title__icontains=search)
         )
         if len(post_list) == 0:
             return render(
@@ -119,7 +120,7 @@ class RSSFeed(Feed):
     description = "RSS feed - Blog Posts"
 
     def items(self):
-        return get_list_or_404(Article.published.all())
+        return get_list_or_404(Post.published.all())
 
     def items_title(self, item):
         return item.title

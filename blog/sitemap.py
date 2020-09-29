@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.contrib.sitemaps import Sitemap
-from .models import Article
+
+from .models import Post
 
 
 class ArticleSiteMap(Sitemap):
@@ -9,7 +10,7 @@ class ArticleSiteMap(Sitemap):
     priority = 1
 
     def items(self):
-        return Article.objects.all()
+        return Post.objects.all()
 
     def lastmod(self, obj):
         return obj.updated_at

@@ -47,7 +47,7 @@ class PublishedManager(models.Manager):
             super().get_queryset().exclude(status='draft'))
 
 
-class Article(models.Model):
+class Post(models.Model):
 
     STATUS_CHOICE = (
         ("draft", "Draft"),
@@ -55,15 +55,16 @@ class Article(models.Model):
     )
 
     title = models.CharField(max_length=100)
+    content = SimpleMDEField(blank=True, null=True)
     category = models.CharField(max_length=50, blank=True)
     tag = models.ManyToManyField(Tag, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    content = SimpleMDEField(blank=True, null=True)
     slug = models.SlugField("Slug")
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICE, default="draft"
     )
-    updated_at = models.DateTimeField(auto_now=True)
+
     objects = models.Manager()
     published = PublishedManager()
 
@@ -92,4 +93,4 @@ class Article(models.Model):
         return "{}".format(self.title)
 
     class Meta:
-        ordering = ["-created_at"]
+        ordering = ["-created"]
