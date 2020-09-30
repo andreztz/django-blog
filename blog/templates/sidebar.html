@@ -19,9 +19,9 @@
                 <a href="{% url 'blog:home' %}">Home</a>
             </li>
             {% endif %}
-            {% if  request.get_full_path != '/aboutme/' %}
+            {% if  request.get_full_path != '/about/' %}
             <li>
-                <a href="{% url 'blog:about_me' %}">About Me</a>
+                <a href="{% url 'blog:about' %}">About Me</a>
             </li>
             {% endif %}
             {% if  request.get_full_path != '/archives/' %}

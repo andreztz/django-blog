@@ -48,11 +48,8 @@ def serial(request):
     )
 
 
-def about_me(request):
-    context = {}
-    description = UserProfile.objects.filter(pk=1).first()
-    context["description"] = description
-    return render(request, "aboutme.html", context)
+def about(request):
+    return render(request, "about.html")
 
 
 def archives(request):

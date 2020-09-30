@@ -28,6 +28,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*,").split(",")
 
+SITE_ID = 1
+
 
 INSTALLED_APPS = [
     "bootstrap_admin",
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "django.contrib.sitemaps",
     "django_extensions",
     "simplemde",
