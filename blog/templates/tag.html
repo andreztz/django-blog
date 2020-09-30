@@ -16,12 +16,12 @@
         <p class="small post-meta">
             published：
                 <a class="">
-                    {{ post.created_at | date:'Y/m/d' }}
+                    {{ post.created | date:'Y/m/d' }}
                 </a>
                 &nbsp;&nbsp;
             edited：
                 <a class="">
-                    {{ post.updated_at | date:'Y/m/d' }}
+                    {{ post.updated | date:'Y/m/d' }}
                 </a>
                 &nbsp;&nbsp;
             category：
@@ -30,7 +30,7 @@
                 </a>
                 &nbsp;&nbsp;
             tags：
-            {% for tag in post.tag.all %}
+            {% for tag in post.tags.all %}
                 <a href="{% url 'blog:search_tag' tag %}">{{ tag }}</a>
             {% endfor %}
         </p>

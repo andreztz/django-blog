@@ -3,7 +3,7 @@
     <header class="content-subhead">
         edited &rarr;
         <a class="">
-            {{ post.updated_at | date:'d/m/Y' }}
+            {{ post.updated | date:'d/m/Y' }}
         </a>
     </header>
     <article class="article">
@@ -17,13 +17,13 @@
                     { post.category }
                 </a>
             </li> -->
-        {% for tag in post.tag.all %}
+        {% for tag in post.tags.all %}
         <li>
-            <a class="tag" href="{% url 'blog:search_tag' tag=tag %}">{{ tag }}</a>
+            <a class="tag" href="{% url 'blog:search_tag' tag=tag post=post.pk %}">{{ tag }}</a>
         </li>
         {% endfor %}
     </ul>
-    <a href="#">Published: {{ post.created_at|date:"D d F Y"}}</a>
+    <a href="#">Published: {{ post.created|date:"D d F Y"}}</a>
     {% include "comments.html" %}
     <a href="#" class="go-top">Go Top</a>
 {% endblock %}

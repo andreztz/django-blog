@@ -3,13 +3,13 @@ from django.core import serializers
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
+from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import get_list_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 
 from .models import Post
-from .models import Tag
 from .models import UserProfile
 
 from .templatetags.markdownify import markdown
@@ -37,7 +37,7 @@ def home(request):
 
 def detail(request, slug):
     post = Post.objects.get(slug=slug)
-    tags = Tag.objects.all()
+    tags = post.tags.all()
     return render(request, "post.html", {"post": post, "tags": tags})
 
 
@@ -66,16 +66,18 @@ def archives(request):
     )
 
 
-def search_tag(request, tag):
-    if request.user.is_authenticated:
-        post_list = get_list_or_404(
-            Post.objects.all().filter(tag__tag_name__iexact=tag)
-        )
-    else:
-        post_list = get_list_or_404(
-            Post.published.filter(tag__tag_name__iexact=tag)
-        )
-    return render(request, "tag.html", {"post_list": post_list})
+def search_tag(request, tag, post):
+    # TODO: Rename to search_similar_posts_by_tag <29-09-20, andreztz> #
+    # TODO: Rename param post to post_pk <29-09-20>, andreztz #
+    post = Post.objects.get(pk=post)
+    post_tags_ids = post.tags.values_list("id", flat=True)
+    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(
+        id=post.id
+    )
+    similar_posts = similar_posts.annotate(same_tags=Count("tags")).order_by(
+        "-same_tags", "-publish"
+    )[:4]
+    return render(request, "tag.html", {"post_list": similar_posts})
 
 
 def search_category(request, category):
