@@ -1,11 +1,14 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.html import mark_safe
 from django.utils.html import format_html
-from simplemde.fields import SimpleMDEField
 
 from . import meta
 from .templatetags.markdownify import markdown
+
+from simplemde.fields import SimpleMDEField
+from taggit.managers import TaggableManager
 
 
 class UserProfile(models.Model):
@@ -33,21 +36,12 @@ class SocialMedia(models.Model):
         )
 
 
-class Tag(models.Model):
-
-    tag_name = models.CharField(max_length=64)
-
-    def __str__(self):
-        return "{}".format(self.tag_name)
-
-
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return (
-            super().get_queryset().exclude(status='draft'))
+        return super().get_queryset().exclude(status="draft")
 
 
-class Article(models.Model):
+class Post(models.Model):
 
     STATUS_CHOICE = (
         ("draft", "Draft"),
@@ -55,17 +49,19 @@ class Article(models.Model):
     )
 
     title = models.CharField(max_length=100)
-    category = models.CharField(max_length=50, blank=True)
-    tag = models.ManyToManyField(Tag, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
     content = SimpleMDEField(blank=True, null=True)
+    category = models.CharField(max_length=50, blank=True)
     slug = models.SlugField("Slug")
+    publish = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICE, default="draft"
     )
-    updated_at = models.DateTimeField(auto_now=True)
+
     objects = models.Manager()
     published = PublishedManager()
+    tags = TaggableManager()
 
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"slug": self.slug})
@@ -92,4 +88,4 @@ class Article(models.Model):
         return "{}".format(self.title)
 
     class Meta:
-        ordering = ["-created_at"]
+        ordering = ["-created"]

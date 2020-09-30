@@ -23,7 +23,7 @@ urlpatterns = [
     path("post/<slug:slug>/", views.detail, name="detail"),
     path("archives/", views.archives, name="archives"),
     path("aboutme/", views.about_me, name="about_me"),
-    path("tag/<str:tag>/", views.search_tag, name="search_tag"),
+    path("tag/<slug:tag>/<str:post>", views.search_tag, name="search_tag"),
     path(
         "category/<str:category>/",
         views.search_category,

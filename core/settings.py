@@ -37,11 +37,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    #'django.contrib.sites',
     "django.contrib.sitemaps",
     "django_extensions",
     "simplemde",
-    "blog",
+    "blog.apps.BlogConfig",
+    "taggit",
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "core.urls"
 
-from django.conf import global_settings
 
 TEMPLATES = [
     {
