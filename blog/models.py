@@ -52,6 +52,7 @@ class Post(models.Model):
     content = SimpleMDEField(blank=True, null=True)
     category = models.CharField(max_length=50, blank=True)
     slug = models.SlugField("Slug")
+    publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(
