@@ -1,12 +1,9 @@
 {% extends "base.html" %}
-{% load custom_markdown %}
-{% load media_responsive %}
-
 {% block content %}
     <div class="content-subhead">Aboute Me</div>
     <div class="well-lg">
         <p class="text-justify">
-            {{ description.description|custom_markdown|media_responsive:400}}
+            Hello World!
         </p>
     </div>
 {% endblock %}
