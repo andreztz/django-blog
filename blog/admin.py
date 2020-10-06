@@ -7,7 +7,7 @@ from .models import UserProfile
 from .models import SocialMedia
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class PostAdmin(admin.ModelAdmin):
     list_display = ("title", "category", "created", "updated", "status")
     search_fields = ("title", "category", "content")
     list_filter = ("created",)
@@ -24,6 +24,6 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ("name", "description")
 
 
-admin.site.register(Post, ArticleAdmin)
+admin.site.register(Post, PostAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(SocialMedia, SocialMediaAdmin)
