@@ -3,8 +3,6 @@ from django.contrib import admin
 # Register your models here.
 
 from .models import Post
-from .models import UserProfile
-from .models import SocialMedia
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -25,5 +23,3 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(UserProfile, UserProfileAdmin)
-admin.site.register(SocialMedia, SocialMediaAdmin)
