@@ -10,8 +10,6 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 
 from .models import Post
-from .models import UserProfile
-
 from .templatetags.markdownify import markdown
 
 
