@@ -18,7 +18,7 @@ def parse(text):
         value = m.group(2)
         value = INDENTATION.sub("\n", value.strip())
         rv[key] = value
-        text = text[len(m.group(0)) :]
+        text = text[len(m.group(0)):]
         m = META.match(text)
 
     return rv, text

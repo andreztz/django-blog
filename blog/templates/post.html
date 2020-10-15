@@ -12,14 +12,9 @@
     </article>
     <hr>
     <ul class="tags">
-        <!-- <li>
-                <a class="tag" href="{% url 'blog:search_category' category=post.category %}">
-                    { post.category }
-                </a>
-            </li> -->
         {% for tag in post.tags.all %}
         <li>
-            <a class="tag" href="{% url 'blog:search_tag' tag=tag post=post.pk %}">{{ tag }}</a>
+            <a class="tag" href="{% url 'blog:search_tag' tag.slug post.pk %}">{{ tag }}</a>
         </li>
         {% endfor %}
     </ul>

@@ -14,7 +14,6 @@ from .templatetags.markdownify import markdown
 
 
 def home(request):
-
     if request.user.is_authenticated:
         posts = Post.objects.all()
     else:
@@ -29,8 +28,27 @@ def home(request):
         post_list = paginator.page(1)
     except EmptyPage:
         post_list = paginator.paginator(paginator.num_pages)
-
     return render(request, "home.html", {"post_list": post_list})
+
+
+def similar_posts_by_tag(request, tag_slug, pk):
+    post = Post.objects.get(pk=pk)
+    post_tags_ids = post.tags.values_list("id", flat=True)
+    if request.user.is_authenticated:
+        similar_posts = Post.objects.filter(tags__in=post_tags_ids).exclude(
+            id=post.id
+        )
+        similar_posts = similar_posts.annotate(
+            same_tags=Count("tags")
+        ).order_by("-same_tags", "-publish")[:4]
+    else:
+        similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(
+            id=post.id
+        )
+        similar_posts = similar_posts.annotate(
+            same_tags=Count("tags")
+        ).order_by("-same_tags", "-publish")[:4]
+    return render(request, "tag.html", {"post_list": similar_posts})
 
 
 def detail(request, slug):
@@ -39,19 +57,11 @@ def detail(request, slug):
     return render(request, "post.html", {"post": post, "tags": tags})
 
 
-def serial(request):
-    posts = get_list_or_404(Post.published)
-    return HttpResponse(
-        serializers.serialize("json", posts), content_type="application/json"
-    )
-
-
 def about(request):
     return render(request, "about.html")
 
 
 def archives(request):
-
     if request.user.is_authenticated:
         post_list = Post.objects.all()
     else:
@@ -59,32 +69,6 @@ def archives(request):
     return render(
         request, "archives.html", {"post_list": post_list, "error": False}
     )
-
-
-def search_tag(request, tag, post):
-    # TODO: Rename to search_similar_posts_by_tag <29-09-20, andreztz> #
-    # TODO: Rename param post to post_pk <29-09-20>, andreztz #
-    post = Post.objects.get(pk=post)
-    post_tags_ids = post.tags.values_list("id", flat=True)
-    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(
-        id=post.id
-    )
-    similar_posts = similar_posts.annotate(same_tags=Count("tags")).order_by(
-        "-same_tags", "-publish"
-    )[:4]
-    return render(request, "tag.html", {"post_list": similar_posts})
-
-
-def search_category(request, category):
-    if request.user.is_authenticated:
-        post_list = get_list_or_404(
-            Post.objects.all().filter(category__iexact=category)
-        )
-    else:
-        post_list = get_list_or_404(
-            Post.published.filter(category__iexact=category)
-        )
-    return render(request, "tag.html", {"post_list": post_list})
 
 
 def blog_search(request):

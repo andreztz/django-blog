@@ -24,13 +24,9 @@
         <a href="#">
             {{ post.created|date:"D d F Y"}}
         </a> &nbsp;&nbsp;
-        Category:
-        <a href="{% url 'blog:search_category' category=post.category %}">
-            {{ post.category|title }}
-        </a> &nbsp;&nbsp;
         Tags:
         {% for tag in post.tags.all %}
-            <a href="{% url 'blog:search_tag' tag=tag.slug post=post.pk %}">
+            <a href="{% url 'blog:search_tag' tag_slug=tag.slug pk=post.pk %}">
                 {{ tag }}
             </a>
         {% endfor %}
@@ -47,7 +43,6 @@
                 <a href="?page={{ post_list.previous_page_number }}">❮</a>
             </li>
             {% endif %}
-
             {% if post_list.has_next %}
             <li>
                 <a href="?page={{ post_list.next_page_number }}">❯</a>
