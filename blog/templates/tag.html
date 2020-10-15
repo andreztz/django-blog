@@ -1,11 +1,9 @@
 {% extends "base.html" %}
-
 {% block pagetitle %}
     {% for post in post_list %}
-        <title>{{ post.category }}</title>
+        <title>{{ post.title }} category</title>
     {% endfor %}
 {% endblock %}
-
 {% block content %}
     <div class="content-subhead">All posts</div>
     {% for post in post_list %}
@@ -24,19 +22,14 @@
                     {{ post.updated | date:'Y/m/d' }}
                 </a>
                 &nbsp;&nbsp;
-            category：
-                <a class="" href="{% url 'blog:search_category' post.category %}">
-                    {{ post.category | title}}
-                </a>
-                &nbsp;&nbsp;
             tags：
             {% for tag in post.tags.all %}
-                <a href="{% url 'blog:search_tag' tag %}">{{ tag }}</a>
+                <a href="{% url 'blog:search_tag' tag.slug post.pk %}">{{ tag }}</a>
             {% endfor %}
         </p>
         <br>
     {% empty %}
-        <li>Sorry, no article with this tag!!.</li>
+        <li>Sorry, there are no similar posts yet!!.</li>
     {% endfor %}
   </div>
   <a href="#" class="go-top">Go Top</a>
