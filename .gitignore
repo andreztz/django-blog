@@ -12,11 +12,12 @@ tests/coverage_html/
 tests/.coverage
 build/
 tests/report/
-
 db.sqlite3
 venv/
+.venv/
 static/*
 !static/.gitkeep
 blog/static/libs/*
 local_settings.py
 .vscode/
+.env
