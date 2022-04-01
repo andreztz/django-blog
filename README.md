@@ -18,7 +18,7 @@ $ python manage.py createsuperuser
 $ cd blog/static/
 $ bower install
 $ cd ../..
-$ cp core/local_settings.py.example core/local_settings.py
+$ cp .env.example .env
 $ python manage.py runserver
 ```
 
