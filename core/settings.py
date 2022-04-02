@@ -90,17 +90,10 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#     }
-# }
-
 DATABASES = {
     'default': config(
         'DATABASE_URL',
-        default='sqlite:///' + str(BASE_DIR) + '/db.sqlite3',
+        default='sqlite:///' + str(BASE_DIR) + '/data/db.sqlite3',
         cast=db_url
     )
 }
@@ -143,10 +136,4 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
 SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=True, cast=bool)
-
-# try:
-#     from .local_settings import *
-# except ImportError:
-#     pass
