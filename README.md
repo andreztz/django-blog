@@ -13,12 +13,12 @@ $ cd django-blog
 $ virtualenv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
+$ cp .env.example .env
 $ python manage.py migrate
 $ python manage.py createsuperuser
 $ cd blog/static/
 $ bower install
 $ cd ../..
-$ cp .env.example .env
 $ python manage.py runserver
 ```
 
