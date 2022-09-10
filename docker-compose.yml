@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  web:
+    restart: always
+    build: .
+    command: python manage.py runserver 0.0.0.0:5000
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    environment:
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      DATABASE_URL: ${DATABASE_URL}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DEBUG: ${DEBUG:-FALSE}
+      SECURE_SSL_REDIRECT: ${SECURE_SSL_REDIRECT:-TRUE}
+    depends_on:
+      - db
+  db:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+volumes:
+  pg_data:
