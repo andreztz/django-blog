@@ -3,11 +3,11 @@ services:
   web:
     restart: always
     build: .
-    command: python manage.py runserver 0.0.0.0:5000
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
-      - "5000:5000"
+      - "8000:8000"
     environment:
       ALLOWED_HOSTS: ${ALLOWED_HOSTS}
       DATABASE_URL: ${DATABASE_URL}
